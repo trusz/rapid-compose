@@ -4,7 +4,7 @@ class RapidCompose < Formula
   homepage ""
   url "https://github.com/trusz/rapid-compose/releases/download/v1.0.6/rapid-compose_1.0.6_Darwin_x86_64.tar.gz"
   version "1.0.6"
-  sha256 "7476b4815f7dc5ad123f49cc66d51421516b63da15b850a5ffb78061b5d4f5b7"
+  sha256 "d307070e4477a1ae58fe47e9f52d019296cf478791b7717991193c9c60d0be96"
 
   def install
     bin.install "rc"
