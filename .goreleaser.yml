@@ -11,6 +11,7 @@ before:
 builds:
   -
     main: ./src/rc
+    binary: rc
     env:
     - CGO_ENABLED=0
 archive:
@@ -35,6 +36,4 @@ brew:
     owner: trusz
     name: rapid-compose
   description: "A teminal UI to start individual services from docker-copose.yaml"
-  install: |
-    bin.install "rc"
   
