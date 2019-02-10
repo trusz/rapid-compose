@@ -30,3 +30,10 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+brew:
+  name: "Rapid Compose"
+  github:
+    owner: trusz
+    name: rapid-compose
+  description: "A teminal UI to start individual services from docker-copose.yaml"
+  
