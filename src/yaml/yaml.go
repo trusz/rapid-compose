@@ -3,6 +3,7 @@ package yaml
 import (
 	"io/ioutil"
 	"log"
+	"sort"
 
 	"gopkg.in/yaml.v2"
 )
@@ -43,7 +44,7 @@ func LoadPossibleServices(showDependencies bool) []string {
 	if !showDependencies {
 		filteredServices = filterOutDependencies(possibleServices, dependencyServices)
 	}
-
+	sort.Strings(filteredServices)
 	return filteredServices
 }
 
