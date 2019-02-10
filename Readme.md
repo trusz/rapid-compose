@@ -12,6 +12,8 @@ Currently in order to install you need to have go.
 
 Clone the repo and execute the `make install` command.
 
+Or download the binary from the releases. The binary is for MacOS only.
+
 ## Usage
 
 Go into a folder where there is a `docker-compose` file and execute `rc`
