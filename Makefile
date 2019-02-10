@@ -1,10 +1,10 @@
 
-
-sh:
-	docker-compose run rapid-compose-dev sh
+run:
+	@scripts/make-run.sh	
 
 build:
 	@scripts/make-build.sh
 
-run:
-	@scripts/make-run.sh	
+install:
+	@scripts/make-install.sh
+
