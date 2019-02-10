@@ -31,7 +31,6 @@ changelog:
     - '^docs:'
     - '^test:'
 brew:
-  name: rapid-compose
   github:
     owner: trusz
     name: rapid-compose
