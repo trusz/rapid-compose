@@ -17,7 +17,7 @@ type service struct {
 }
 
 // LoadPossibleServices _
-func LoadPossibleServices(showDependencies bool) []string {
+func LoadPossibleServices(showAll bool) []string {
 	yamlFile, err := ioutil.ReadFile("docker-compose.yaml")
 	if err != nil {
 		yamlFile, err = ioutil.ReadFile("docker-compose.yml")
@@ -41,7 +41,7 @@ func LoadPossibleServices(showDependencies bool) []string {
 	}
 
 	var filteredServices = possibleServices
-	if !showDependencies {
+	if !showAll {
 		filteredServices = filterOutDependencies(possibleServices, dependencyServices)
 	}
 	sort.Strings(filteredServices)
