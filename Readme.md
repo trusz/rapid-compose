@@ -17,4 +17,8 @@ brew install trusz/tap/rapid-compose
 Go into a folder where there is a `docker-compose` file and execute `rc`
 
 By default, `rc` filters out every dependency services (`depends_on`) in order to show only the main ones.  
-However with the `-d` flag all services are shown.
+
+### Options
+
+- `-a`: Show all services
+- `-i`: Inverse selection. Start everything except selected ones.
