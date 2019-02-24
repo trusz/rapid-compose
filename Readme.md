@@ -18,6 +18,9 @@ Go into a folder where there is a `docker-compose` file and execute `rc`
 
 By default, `rc` filters out every dependency services (`depends_on`) in order to show only the main ones.  
 
+The selection is persisted per directory and used as pre-selection in the next usage.
+The selection is saved in JSON format in `~/.rapid-compose`.
+
 ### Options
 
 - `-a`: Show all services
