@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/trusz/rapid-compose/src/persist"
+
 	"github.com/trusz/rapid-compose/src/dc"
 	"github.com/trusz/rapid-compose/src/prompt"
 	"github.com/trusz/rapid-compose/src/yaml"
@@ -23,8 +25,11 @@ func main() {
 	var inverse = flag.Bool("i", false, "Inverse selection. Start everything except selected ones.")
 	flag.Parse()
 
+	var oldSelection = persist.LoadSelections()
 	possibleServices := yaml.LoadPossibleServices(*showAll)
-	services := prompt.Question(possibleServices, *inverse)
+	services := prompt.Question(possibleServices, oldSelection, *inverse)
+
+	persist.SaveSelections(services)
 
 	if len(services) > 0 {
 		dc.Start(services)

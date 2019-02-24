@@ -5,7 +5,11 @@ import (
 )
 
 // Question _
-func Question(possibleServices []string, inverse bool) []string {
+func Question(
+	possibleServices []string,
+	oldSelection []string,
+	inverse bool,
+) []string {
 
 	var message = "RAPID COMPOSE(RC) \nSelect services to start:"
 	if inverse {
@@ -16,6 +20,7 @@ func Question(possibleServices []string, inverse bool) []string {
 	prompt := &survey.MultiSelect{
 		Message: message,
 		Options: possibleServices,
+		Default: oldSelection,
 	}
 	survey.AskOne(prompt, &choosenServices, nil)
 
