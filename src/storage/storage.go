@@ -8,6 +8,7 @@ import (
 )
 
 const fileName = ".rapid-compose"
+const defaultContent = "[]"
 
 var filePath = homeFolder() + "/" + fileName
 
@@ -45,7 +46,7 @@ func writeFile(path string, content []byte) {
 func readFile(path string) []byte {
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
-		panic(err)
+		return []byte(defaultContent)
 	}
 	return content
 }
