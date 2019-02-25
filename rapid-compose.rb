@@ -2,9 +2,9 @@
 class RapidCompose < Formula
   desc "A teminal UI to start individual services from docker-copose.yaml"
   homepage ""
-  url "https://github.com/trusz/rapid-compose/releases/download/v1.3.0/rapid-compose_1.3.0_Darwin_x86_64.tar.gz"
-  version "1.3.0"
-  sha256 "a0ebadeba833c3cf678fd2806d4ab2945100af04a0ff342b22e5f18cc1d75634"
+  url "https://github.com/trusz/rapid-compose/releases/download/v1.3.1/rapid-compose_1.3.1_Darwin_x86_64.tar.gz"
+  version "1.3.1"
+  sha256 "cbf7eb3458207ada30d65ea069e8aa8b5c1dbb583b447565728ae2a3c9993fb1"
 
   def install
     bin.install "rc"
