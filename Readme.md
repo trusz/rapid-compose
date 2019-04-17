@@ -25,3 +25,4 @@ The selection is saved in JSON format in `~/.rapid-compose`.
 
 - `-a`: Show all services
 - `-i`: Inverse selection. Start everything except selected ones.
+- `-r`: Resets selected services
