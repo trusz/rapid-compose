@@ -23,9 +23,13 @@ func main() {
 
 	var showAll = flag.Bool("a", false, "Show all service.")
 	var inverse = flag.Bool("i", false, "Inverse selection. Start everything except selected ones.")
+	var reset = flag.Bool("r", false, "Resets selected services.")
 	flag.Parse()
 
-	var oldSelection = persist.LoadSelections()
+	var oldSelection = []string{}
+	if !*reset {
+		oldSelection = persist.LoadSelections()
+	}
 	possibleServices := yaml.LoadPossibleServices(*showAll)
 	services := prompt.Question(possibleServices, oldSelection, *inverse)
 
