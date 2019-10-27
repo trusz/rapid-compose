@@ -18,6 +18,46 @@ func Start(services []string) {
 	dcDown()
 }
 
+// Restart _
+func Restart(containerIDs []string) {
+	command := "docker restart " + strings.Join(containerIDs[:], " ")
+	restartCommand := cmd.Run(command)
+	restartCommand.Wait()
+}
+
+// FindRunningContainers _
+func FindRunningContainers() RunningContainers {
+	command := "docker ps --format \"{{.ID}}\t{{.Image}}\""
+	output := cmd.Exec(command)
+	lines := strings.Split(output, "\n")
+
+	containers := make(RunningContainers)
+
+	for _, line := range lines {
+		fields := strings.Fields(line)
+		if len(fields) < 2 {
+			continue
+		}
+
+		containerID := fields[0]
+		imageName := fields[1]
+
+		containers[imageName] = containerID
+
+	}
+
+	return containers
+}
+
+// RunningContainers _
+type RunningContainers map[ImageName]ContainerID
+
+// ImageName _
+type ImageName = string
+
+// ContainerID _
+type ContainerID = string
+
 func dcDown() {
 	command := "docker-compose down"
 	cmd.Run(command).Wait()

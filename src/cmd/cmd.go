@@ -3,6 +3,7 @@ package cmd
 import (
 	"bufio"
 	"fmt"
+	"log"
 	"os/exec"
 )
 
@@ -35,4 +36,22 @@ func Run(command string) *exec.Cmd {
 	}()
 
 	return cmd
+}
+
+// Exec _
+func Exec(command string) string {
+	app := "sh"
+	arg0 := "-c"
+
+	// cmd := exec.Command(app, arg0, command)
+	// stdout, _ := cmd.StdoutPipe()
+	// stderr, _ := cmd.StderrPipe()
+
+	// cmd.Run()
+
+	out, err := exec.Command(app, arg0, command).Output()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return string(out)
 }

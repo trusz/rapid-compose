@@ -9,28 +9,28 @@ import (
 )
 
 type dockerCompose struct {
-	Services map[string]service `yaml:"services"`
+	Services Services `yaml:"services"`
 }
 
-type service struct {
+// Services _
+type Services map[string]Service
+
+// Service _
+type Service struct {
 	DependsOn []string `yaml:"depends_on"`
+	Image     string   `yaml:"image"`
 }
 
 // LoadPossibleServices _
-func LoadPossibleServices(showAll bool) []string {
-	yamlFile, err := ioutil.ReadFile("docker-compose.yaml")
-	if err != nil {
-		yamlFile, err = ioutil.ReadFile("docker-compose.yml")
-		if err != nil {
-			log.Printf("Error -> Yaml file read: #%v ", err)
-		}
-	}
+func LoadPossibleServices() Services {
+	dc := parseDCFile()
+	return dc.Services
+}
 
-	var dc = &dockerCompose{}
-	err = yaml.Unmarshal(yamlFile, dc)
-	if err != nil {
-		log.Fatalf("Error -> Unmarshal: %v", err)
-	}
+// LoadPossibleServicesNames _
+func LoadPossibleServicesNames(showAll bool) []string {
+
+	dc := parseDCFile()
 
 	var possibleServices = make([]string, 0)
 	var dependencyServices = make([]string, 0)
@@ -46,6 +46,30 @@ func LoadPossibleServices(showAll bool) []string {
 	}
 	sort.Strings(filteredServices)
 	return filteredServices
+}
+
+func parseDCFile() dockerCompose {
+	dcFile := readDockerComposeFile()
+
+	var dc = &dockerCompose{}
+	err := yaml.Unmarshal(dcFile, dc)
+	if err != nil {
+		log.Fatalf("Error -> Unmarshal: %v", err)
+	}
+
+	return *dc
+}
+
+func readDockerComposeFile() []byte {
+	yamlFile, err := ioutil.ReadFile("docker-compose.yaml")
+	if err != nil {
+		yamlFile, err = ioutil.ReadFile("docker-compose.yml")
+		if err != nil {
+			log.Printf("Error -> Yaml file read: #%v ", err)
+		}
+	}
+
+	return yamlFile
 }
 
 func filterOutDependencies(services []string, dependencies []string) []string {
