@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	showAll, inverse, reset, restart, _ := parseFlags()
+	showAll, inverse, reset, restart, detached := parseFlags()
 
 	if reset {
 		persist.SaveSelections(emptyServiceList)
@@ -33,6 +33,10 @@ func main() {
 	persist.SaveSelections(services)
 
 	if len(services) > 0 {
+		if detached {
+			dc.StartDetached(services)
+			return
+		}
 		dc.Start(services)
 	}
 
