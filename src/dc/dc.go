@@ -9,22 +9,6 @@ import (
 	"github.com/trusz/rapid-compose/src/cmd"
 )
 
-// Start _
-func Start(services []string) {
-	command := "docker-compose up " + strings.Join(services[:], " ")
-	upCommand := cmd.Run(command)
-	<-waitForInterrupt()
-	upCommand.Wait()
-	dcDown()
-}
-
-// Restart _
-func Restart(containerIDs []string) {
-	command := "docker restart " + strings.Join(containerIDs[:], " ")
-	restartCommand := cmd.Run(command)
-	restartCommand.Wait()
-}
-
 // FindRunningContainers _
 func FindRunningContainers() RunningContainers {
 	command := "docker ps --format \"{{.ID}}\t{{.Image}}\""
