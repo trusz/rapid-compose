@@ -14,7 +14,7 @@ import (
 
 func main() {
 
-	showAll, inverse, reset, restart := parseFlags()
+	showAll, inverse, reset, restart, _ := parseFlags()
 
 	if reset {
 		persist.SaveSelections(emptyServiceList)
@@ -40,7 +40,13 @@ func main() {
 
 var emptyServiceList = []string{}
 
-func parseFlags() (showAll bool, inverse bool, reset bool, restart bool) {
+func parseFlags() (
+	showAll bool,
+	inverse bool,
+	reset bool,
+	restart bool,
+	detached bool,
+) {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Rapid Compose (rc) starts selected services.\n")
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
@@ -51,9 +57,10 @@ func parseFlags() (showAll bool, inverse bool, reset bool, restart bool) {
 	_showAll := flag.Bool("a", false, "Show all service.")
 	_inverse := flag.Bool("i", false, "Inverse selection. Start everything except selected ones.")
 	_reset := flag.Bool("r", false, "Resets selected services.")
+	_detached := flag.Bool("d", false, "Starts services in detached mode.")
 	_restart := flag.Bool("restart", false, "Restart selected services")
 	flag.Parse()
 
-	return *_showAll, *_inverse, *_reset, *_restart
+	return *_showAll, *_inverse, *_reset, *_restart, *_detached
 
 }
