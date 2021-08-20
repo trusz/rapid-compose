@@ -21,7 +21,11 @@ By default, `rc` filters out every dependency services (`depends_on`) in order t
 The selection is persisted per directory and used as pre-selection in the next usage.
 The selection is saved in JSON format in `~/.rapid-compose`.
 
-### Options
+## Commands
+
+- `build`: builds selected services
+
+### Flags
 
 - `-a`: Show all services
 - `-i`: Inverse selection. Start everything except selected ones.
