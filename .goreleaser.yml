@@ -5,35 +5,37 @@ env_files:
 before:
   hooks:
     # you may remove this if you don't use vgo
-    - go mod download
+    # - go mod download
     # you may remove this if you don't need go generate
-    - go generate ./...
+    # - go generate ./...
 builds:
-  -
-    main: ./src/rc
+  - main: ./src/rc
     binary: rc
     env:
-    - CGO_ENABLED=0
-archive:
-  replacements:
-    darwin: Darwin
-    linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}-next"
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
-brew:
-  github:
-    owner: trusz
-    name: rapid-compose
-  description: "A teminal UI to start individual services from docker-copose.yaml"
-  
+      - "^docs:"
+      - "^test:"
+brews:
+  - tap:
+      owner: trusz
+      name: rapid-compose
+  - description: "A teminal UI to start individual services from docker-copose.yaml"
