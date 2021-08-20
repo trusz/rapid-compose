@@ -43,7 +43,7 @@ type ImageName = string
 type ContainerID = string
 
 func dcDown() {
-	command := "docker-compose down"
+	command := "docker compose down"
 	cmd.Run(command).Wait()
 }
 

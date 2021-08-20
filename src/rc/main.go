@@ -14,7 +14,9 @@ import (
 
 func main() {
 
-	showAll, inverse, reset, restart, detached := parseFlags()
+	showAll, inverse, reset, restart, detached, build := parseFlags()
+
+	build = build || hasBuildCommand()
 
 	if reset {
 		persist.SaveSelections(emptyServiceList)
@@ -28,7 +30,12 @@ func main() {
 
 	oldSelection := persist.LoadSelections()
 	possibleServices := yaml.LoadPossibleServicesNames(showAll)
-	services := prompt.QuestionForStart(possibleServices, oldSelection, inverse)
+	services := prompt.QuestionForStart(possibleServices, oldSelection, inverse, build)
+
+	if build {
+		dc.Build(services)
+		return
+	}
 
 	persist.SaveSelections(services)
 
@@ -50,6 +57,7 @@ func parseFlags() (
 	reset bool,
 	restart bool,
 	detached bool,
+	build bool,
 ) {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, "Rapid Compose (rc) starts selected services.\n")
@@ -63,8 +71,9 @@ func parseFlags() (
 	_reset := flag.Bool("r", false, "Resets selected services.")
 	_detached := flag.Bool("d", false, "Starts services in detached mode.")
 	_restart := flag.Bool("restart", false, "Restart selected services")
+	_build := flag.Bool("b", false, "Build selected services")
 	flag.Parse()
 
-	return *_showAll, *_inverse, *_reset, *_restart, *_detached
+	return *_showAll, *_inverse, *_reset, *_restart, *_detached, *_build
 
 }

@@ -9,10 +9,14 @@ func QuestionForStart(
 	possibleServices []string,
 	oldSelection []string,
 	inverse bool,
+	build bool,
 ) []string {
 	var message = "RAPID COMPOSE(RC) \nSelect services to start:"
 	if inverse {
 		message = "RAPID COMPOSE(RC) \nSelect services NOT to start:"
+	}
+	if build {
+		message = "RAPID COMPOSE(RC) \nSelect services to build:"
 	}
 
 	chosenServices := Question(possibleServices, oldSelection, message)

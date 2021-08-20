@@ -8,6 +8,6 @@ import (
 
 // StartDetached _
 func StartDetached(services []string) {
-	command := "docker-compose up " + strings.Join(services[:], " ")
+	command := "docker compose up " + strings.Join(services[:], " ")
 	cmd.Background(command)
 }
