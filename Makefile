@@ -8,6 +8,9 @@ build:
 install:
 	@scripts/make-install.sh
 
+uninstall:
+	@rm ~/go/bin/rc
+
 release:
 	@scripts/make-release.sh
 

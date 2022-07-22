@@ -37,5 +37,6 @@ changelog:
 brews:
   - tap:
       owner: trusz
-      name: rapid-compose
+      # name: rapid-compose
+      name: homebrew-tap
   - description: "A teminal UI to start individual services from docker-copose.yaml"
